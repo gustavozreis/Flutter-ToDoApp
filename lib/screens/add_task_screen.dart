@@ -30,14 +30,14 @@ class AddTaskScreen extends StatelessWidget {
                   fontSize: 30.0,
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.symmetric(
+              const Padding(
+                padding: EdgeInsets.symmetric(
                   vertical: 10.0,
                 ),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    labelText: 'Add your task',
-                  ),
+                child: TextField(
+                  autofocus: true,
+                  decoration: InputDecoration(),
+                  textAlign: TextAlign.center,
                 ),
               ),
               Padding(
@@ -49,11 +49,21 @@ class AddTaskScreen extends StatelessWidget {
                     Expanded(
                       child: ElevatedButton(
                         style: ButtonStyle(
-                            padding: MaterialStateProperty.all<EdgeInsets>(
-                          EdgeInsets.all(20.0),
-                        )),
-                        onPressed: () {},
-                        child: const Text('ADD'),
+                          backgroundColor: MaterialStateProperty.all<Color>(
+                              Colors.lightBlueAccent),
+                          padding: MaterialStateProperty.all<EdgeInsets>(
+                            EdgeInsets.all(15.0),
+                          ),
+                        ),
+                        onPressed: () {
+                          // TODO: add functionality for the add button
+                        },
+                        child: const Text(
+                          'ADD',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                          ),
+                        ),
                       ),
                     ),
                   ],
