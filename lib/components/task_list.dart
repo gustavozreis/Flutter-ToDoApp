@@ -1,43 +1,38 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../models/task.dart';
 import '../../components/task_tile.dart';
+import '../models/tasks_provider.dart';
 
-class TaskList extends StatefulWidget {
+class TaskList extends StatelessWidget {
   const TaskList({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<TaskList> createState() => _TaskListState();
-}
-
-class _TaskListState extends State<TaskList> {
-  List<Task> tasks = [
-    Task(name: 'Buy milk'),
-    Task(name: 'Buy eggs'),
-    Task(name: 'Buy bread'),
-  ];
-
-  @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
-      child: ListView.builder(
-        itemBuilder: (context, index) {
-          return TaskTile(
-            taskTitle: tasks[index].name,
-            isChecked: tasks[index].isDone,
-            checkboxCallback: (checkboxState) {
-              setState(() {
-                tasks[index].toggleDone();
-              });
+    return Consumer<TaskData>(
+      builder: (context, taskData, child) {
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
+          child: ListView.builder(
+            itemBuilder: (context, index) {
+              return TaskTile(
+                taskTitle: taskData.tasks[index].name,
+                isChecked: taskData.tasks[index].isDone,
+                checkboxCallback: (checkboxState) {
+                  /*setState(() {
+                  widget.tasks[index].toggleDone();
+                });*/
+                },
+              );
             },
-          );
-        },
-        itemCount: tasks.length,
-      ),
+            itemCount: taskData.taskCount,
+          ),
+        );
+      },
     );
   }
 }
