@@ -7,9 +7,7 @@ import '../../components/task_tile.dart';
 import '../models/tasks_provider.dart';
 
 class TaskList extends StatelessWidget {
-  const TaskList({
-    Key? key,
-  }) : super(key: key);
+  const TaskList({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -19,13 +17,15 @@ class TaskList extends StatelessWidget {
           padding: const EdgeInsets.symmetric(horizontal: 30.0, vertical: 30.0),
           child: ListView.builder(
             itemBuilder: (context, index) {
+              final task = taskData.tasks[index];
               return TaskTile(
-                taskTitle: taskData.tasks[index].name,
-                isChecked: taskData.tasks[index].isDone,
+                taskTitle: task.name,
+                isChecked: task.isDone,
                 checkboxCallback: (checkboxState) {
-                  /*setState(() {
-                  widget.tasks[index].toggleDone();
-                });*/
+                  taskData.updateTask(task);
+                },
+                longPressCallback: () {
+                  taskData.deleteTask(task);
                 },
               );
             },
